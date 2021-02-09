@@ -1,0 +1,68 @@
+﻿@model ListagemVeiculosModel
+    <style>
+        .simular-aluguel {
+            display: none;
+        }
+
+        .item-carro {
+            padding: 20px;
+        }
+
+            .item-carro:hover {
+                display: block;
+                box-shadow: 0 0 11px rgba(33,33,33,.2);
+                border-radius: 10px;
+                color: dodgerblue;
+            }
+
+        .dados-veiculo:hover .simular-aluguel {
+            display: block;
+            color: red;
+        }
+    </style>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row ">
+                    @foreach (var veiculo in Model.ListaVeiculosDisponiveis)
+                    {
+                        <div class="col-sm-6 col-md-4 col-lg-4">
+                            <div class="item-carro" onclick="window.location.href = '@Url.Action("Privacy", "Home")'">
+                                <div class="dados-veiculo">
+                                    <div class="imagens">
+                                        <div class="bx-viewport" aria-live="polite" style="width: 100%; overflow:hidden; position: relative; max-height: 262px;">
+                                            <center>
+                                                <img alt="@veiculo.Modelo?.DescricaoModelo" title="@veiculo.Modelo?.DescricaoModelo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHjckLY6krKj8HhYL3_aQnP-8kWayodE3foQ&usqp=CAU" />
+                                            </center>
+                                        </div>
+                                    </div>
+                                    <div class="titulo-carro">
+                                        <h3 alt="@veiculo.Modelo?.DescricaoModelo" title="@veiculo.Modelo?.DescricaoModelo"> </h3>
+                                    </div>
+                                    <div class="info-carro bg-gray">
+                                        <div class="row mt-2">
+                                            <div class="col text-center">
+                                                @String.Format("{0} {1} {2}", veiculo.Marca?.DescricaoMarca, veiculo.Modelo?.DescricaoModelo, veiculo.Ano)
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col text-center">
+                                                <div>Valor/Hora: @String.Format(new System.Globalization.CultureInfo("pt-BR"), "{0:C}", veiculo.ValorHora)</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="col-md-12 simular-aluguel">
+                                        <center>
+                                            <button class="btn btn-success"><span class="glyphicon glyphicon-star"> Clique e confira!</span></button>
+                                        </center>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>

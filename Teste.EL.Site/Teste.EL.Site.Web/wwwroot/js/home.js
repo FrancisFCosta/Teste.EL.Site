@@ -3,9 +3,9 @@
     function aoAlterarCategoria() {
         var categoriaSelecionada = $('#ListaCategorias').children("option:selected").val();
 
-        chamadaAjax(
+        chamadaGET(
             Home.UrlListarPorCategoria,
-            { categoriaSelecionada: categoriaSelecionada },
+            { categoria: categoriaSelecionada },
             listarVeiculosSucesso
         );
     }

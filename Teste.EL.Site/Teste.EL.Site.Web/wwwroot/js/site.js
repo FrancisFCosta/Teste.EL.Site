@@ -1,9 +1,9 @@
-﻿function chamadaAjax(url, parametros, callbackSucesso, callbackErro, async, naoExibirCarregando) {
+﻿function chamadaAjaxPOST(url, parametros, callbackSucesso, callbackErro, async, naoExibirCarregando) {
     $.ajax({
         type: "POST",
         url: url,
         cache: false,
-        data: JSON.stringify(parametros),
+        data: typeof (parametros) === "object" ? JSON.stringify(parametros) : parametros,
         dataType: 'html',
         traditional: true,
         contentType: 'application/json',
@@ -27,6 +27,10 @@
             }
         }
     });
+}
+
+function chamadaGET(url, parametros, callbackSucesso, callbackErro, async, naoExibirCarregando) {
+    jQuery.get(url, parametros, callbackSucesso, 'html');
 }
 
 function exibirCarregando() {

@@ -68,13 +68,21 @@ namespace Teste.EL.Site.Infrastructure.Repositories.BaseRepository
 
             var response = cliente.Execute(request);
             if (response.StatusCode == System.Net.HttpStatusCode.OK || response.StatusCode == System.Net.HttpStatusCode.Created)
-                return JsonSerializer.Deserialize<T>(response.Content);
+                return JsonSerializer.Deserialize<T>(response.Content, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
             else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
-                throw new Exception($"{response.StatusCode}: {response.Content}");
+                return default(T);
             else
             {
-                var retorno = JsonSerializer.Deserialize<RetornoApi>(response.Content);
-                throw new Exception(response.StatusCode + " : " + string.Join(" ; ", retorno.Erros.Select(r => r.Mensagem)));
+                RetornoApi retorno = new RetornoApi();
+                string mensagemRetorno = String.Empty;
+
+                if (response.Content != null && !String.IsNullOrWhiteSpace(response.Content)) 
+                {
+                    retorno = JsonSerializer.Deserialize<RetornoApi>(response.Content, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                    mensagemRetorno = string.Join(" ; ", retorno.Erros.Select(r => r.Mensagem));
+                }
+
+                throw new Exception($"Codigo Erro (http): {response.StatusCode}, Mensagem:{ mensagemRetorno}");
             }
             throw new Exception(" Codigo Erro: " + response.StatusCode);
         }

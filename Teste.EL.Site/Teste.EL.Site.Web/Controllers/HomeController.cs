@@ -14,28 +14,21 @@ namespace Teste.EL.Site.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly VeiculoBusiness _veiculoBLL;
 
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController()
         {
-            _logger = logger;
             _veiculoBLL = new VeiculoBusiness();
         }
 
-        public IActionResult Index(CategoriaVeiculo? categoriaSelecionada)
+        public IActionResult Index()
         {
-            if (categoriaSelecionada.HasValue)
-                return View(new ListagemVeiculosModel(ListarVeiculosPorCategoria(categoriaSelecionada)));
-
-            return View(new ListagemVeiculosModel(ListarVeiculosPorCategoria(categoriaSelecionada)));
+            return View(new ListagemVeiculosModel(ListarVeiculosPorCategoria(null)));
         }
 
-        public PartialViewResult ListarVeiculos(int? categoriaSelecionada)
+        public PartialViewResult ListarVeiculos([FromQuery] CategoriaVeiculo? categoria)
         {
-            var categoria = (CategoriaVeiculo?)categoriaSelecionada;
-
             var listaVeiculos = ListarVeiculosPorCategoria(categoria);
 
             return PartialView("~/Views/Home/_ListaVeiculos.cshtml", new ListagemVeiculosModel(listaVeiculos, categoria));
@@ -43,26 +36,10 @@ namespace Teste.EL.Site.Web.Controllers
 
         private List<VeiculoDTO> ListarVeiculosPorCategoria(CategoriaVeiculo? categoria)
         {
-            return _veiculoBLL.ListarDisponiveis("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEyNTQyNDcxNjU3Iiwicm9sZSI6IkNsaWVudGUiLCJuYmYiOjE2MTI5Mzg5ODMsImV4cCI6MTYxMjk1MzM4MywiaWF0IjoxNjEyOTM4OTgzfQ.cnCLvTiju8xxyTGTGcRZJh-Kr7rhFwsIOIA4ORjpQl0");
-
-            //List<VeiculoDTO> listaVeiculosDisponiveis = new List<VeiculoDTO>();
-            //for (int i = 0; i < 6; i++)
-            //{
-            //    listaVeiculosDisponiveis.Add(new VeiculoDTO()
-            //    {
-            //        IdVeiculo = i + 1,
-            //        Placa = "QUH1051",
-            //        Ano = "2020/2020",
-            //        Combustivel = "Alcool",
-            //        Categoria = "Basico",
-            //        LimitePortamalas = 320,
-            //        Modelo = new ModeloDTO() { DescricaoModelo = "ARGO DRIVE 1.0" },
-            //        Marca = new MarcaDTO() { DescricaoMarca = "FIAT", IdMarca = 1 },
-            //        ValorHora = 27.99
-            //    });
-            //}
-
-            //return listaVeiculosDisponiveis;
+            if (categoria.HasValue)
+                return _veiculoBLL.ListarDisponiveisPorCategoria(categoria.Value);
+            else
+                return _veiculoBLL.ListarDisponiveis();
         }
     }
 }

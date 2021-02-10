@@ -7,11 +7,11 @@
     <div class="row">
         <div class="col-md-12 section-header" style="text-align: left; border-bottom: 1px solid; border-bottom-color: #eaeaea; padding-bottom:10px;">
             <h3 class="title">
-                Simulação da Reserva
+                SIMULAÇÃO DA RESERVA
             </h3>
         </div>
     </div>
-    <div style="text-align:left; text-decoration-color:gray; margin-top:-10px;">
+    <div style="text-align:left; text-decoration-color:gray;">
         <font ="5px;"><i>Listagem</i> > <b>Simulação</b> > <i>Reserva </i> </font>
     </div>
     <br />
@@ -20,28 +20,28 @@
         <div class="col-md-4">
             <form asp-action="SimularReserva">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                
+                @Html.HiddenFor(m => m.IdVeiculo)
+            <div class="form-group">
+                <label asp-for="Placa" class="control-label" disabled="disabled">Placa</label>
+                <input asp-for="Placa" class="form-control" />
+            </div>
                 <div class="form-group">
-                    <label asp-for="IdVeiculo" class="control-label"></label>
-                    <input asp-for="IdVeiculo" class="form-control" />
-                    <span asp-validation-for="IdVeiculo" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="ValorHoraVeiculo" class="control-label"></label>
+                    <label asp-for="ValorHoraVeiculo" class="control-label" disabled="disabled">Valor/Hora</label>
                     <input asp-for="ValorHoraVeiculo" class="form-control" />
-                    <span asp-validation-for="ValorHoraVeiculo" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="TotalHorasAluguel" class="control-label"></label>
+                    <label asp-for="TotalHorasAluguel" class="control-label">Total Horas / Aluguel</label>
                     <input asp-for="TotalHorasAluguel" class="form-control" />
                     <span asp-validation-for="TotalHorasAluguel" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="DataPrevista" class="control-label"></label>
+                    <label asp-for="DataPrevista" class="control-label">Data Prevista para Retirada</label>
                     <input asp-for="DataPrevista" class="form-control" />
                     <span asp-validation-for="DataPrevista" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
+                    <input type="submit" value="Simular!" class="btn btn-primary" />
                 </div>
             </form>
         </div>

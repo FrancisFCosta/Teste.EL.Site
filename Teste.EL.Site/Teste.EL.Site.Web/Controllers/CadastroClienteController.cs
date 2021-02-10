@@ -9,9 +9,6 @@ namespace Teste.EL.Site.Web.Controllers
 
         public IActionResult Index()
         {
-            //if (!idCliente.HasValue)
-            //    return RedirectToAction("Login", "CadastroUsuario");
-
             ClienteDTO cliente = ObterClientePorId(1);
             return View(new ClienteModel(cliente));
         }

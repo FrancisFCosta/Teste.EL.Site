@@ -11,28 +11,29 @@
                 </h3>
             </div>
         </div>
-        <br/>
+        <br />
         <center>
             <div class="row">
                 <div class="col-md-12">
-                    <form action="@Url.Action("CadastroUsuario","Login")' method="post" role="form">
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.Login, new { @class = "col-md-4 control-label" })
-                            <br />
-                            @Html.TextBoxFor(m => m.Login, new { @class = "col-md-4 form-control" })
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.Senha, new { @class = "col-md-4 control-label" })
-                            <br />
-                            @Html.PasswordFor(m => m.Senha, new { @class = "col-md-4 form-control" })
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" value="Entrar" class="btn btn-info col-md-2"> Entrar</button>
-                        </div>
-                        <p>
-                            @Html.ActionLink("Registrar novo usuário", "Index")
-                        </p>
-                    </form>
+                    <div style="display:none;">
+                        @Html.BeginForm("Login", "CadastroUsuario")
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Login, new { @class = "col-md-4 control-label" })
+                        <br />
+                        @Html.TextBoxFor(m => m.Login, new { @class = "col-md-4 form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Senha, new { @class = "col-md-4 control-label" })
+                        <br />
+                        @Html.PasswordFor(m => m.Senha, new { @class = "col-md-4 form-control" })
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" value="Entrar" class="btn btn-info col-md-2"> Entrar</button>
+                    </div>
+                    <p>
+                        @Html.ActionLink("Registrar novo usuário", "Index")
+                    </p>
                 </div>
             </div>
         </center>

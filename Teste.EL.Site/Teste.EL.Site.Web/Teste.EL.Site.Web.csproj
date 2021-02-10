@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Teste.EL.Site.Business\Teste.EL.Site.Business.csproj" />
     <ProjectReference Include="..\Teste.EL.Site.DataTransferObjects\Teste.EL.Site.Entidades.csproj" />
   </ItemGroup>
 

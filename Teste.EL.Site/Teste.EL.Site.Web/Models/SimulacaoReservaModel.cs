@@ -12,7 +12,10 @@ namespace Teste.EL.Site.Web.Models
         public string Placa { get; set; }
         public double ValorHoraVeiculo { get; set; }
         public double TotalHorasAluguel { get; set; }
-        public double DataPrevista { get; set; }
+        public DateTime DataPrevista { get; set; }
+
+        public SimulacaoReservaModel()
+        {}
 
         public SimulacaoReservaModel(VeiculoDTO veiculoDTO) 
         {

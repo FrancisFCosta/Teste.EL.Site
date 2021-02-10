@@ -31,7 +31,7 @@
                     @foreach (var veiculo in Model.ListaVeiculosDisponiveis)
                     {
                         <div class="col-sm-6 col-md-4 col-lg-4">
-                            <div class="item-carro" onclick="window.location.href = '@Url.Action("Index", "Reserva")/?idVeiculo='+ @veiculo.IdVeiculo">
+                            <div class="item-carro" onclick="window.location.href = '@Url.Action("Index", "Reserva")/?placa=@veiculo.Placa'">
                                 <div class="dados-veiculo">
                                     <div class="imagens">
                                         <div class="bx-viewport" aria-live="polite" style="width: 100%; overflow:hidden; position: relative; max-height: 262px;">

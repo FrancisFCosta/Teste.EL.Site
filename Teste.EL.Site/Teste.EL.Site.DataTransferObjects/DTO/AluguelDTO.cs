@@ -12,6 +12,7 @@ namespace Teste.EL.Site.Entidades.DTO
         public VeiculoDTO Veiculo { get; set; }
         public ClienteDTO Cliente { get; set; }
         public CategoriaVeiculo Categoria { get; set; }
+        public DateTime DataPrevistaAluguel { get; set; }
         public double ValorHora { get; set; }
         public double TotalDeHoras { get; set; }
         public double ValorFinal { get; set; }

@@ -3,62 +3,73 @@
 @{
     ViewData["Title"] = "ResumoReserva";
 }
-<div id="filtro-listagem-veiculo">
+<div id="resumo-reserva">
     <div class="row">
         <div class="col-md-12 section-header" style="text-align: left; border-bottom: 1px solid; border-bottom-color: #eaeaea; padding-bottom:10px;">
             <h3 class="title">
-                Resumo da Reserva
+                CONFIRMAÇÃO DA RESERVA
             </h3>
         </div>
     </div>
+    <div style="text-align:left; text-decoration-color:gray;">
+        <font ="5px;"><i>Listagem</i> > <i>Simulação</i> > <b>Reserva</b> </font>
+    </div>
+    <br />
+    <br />
     <br />
     <div>
         <div class="row">
+            <div class="col-md-6">
+                <div class="imagens">
+                    <div class="bx-viewport" aria-live="polite" style="width: 100%; overflow:hidden; position: relative; margin-top:15%; max-height: 400px; max-width:500px;">
+                        <center>
+                            <img alt="@Model.Placa" title="@Model.Placa" src="data:image/jpeg;base64,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" />
+                        </center>
+                    </div>
+                </div>
+            </div>
             <div class="col-md-4">
                 <form asp-action="ConcluirReserva">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    @Html.HiddenFor(m => m.IdCliente)
+                    @Html.HiddenFor(m => m.IdVeiculo)
+                    @Html.HiddenFor(m => m.Placa)
+                    @Html.HiddenFor(m => m.Categoria)
+                    @Html.HiddenFor(m => m.ValorHora)
+                    @Html.HiddenFor(m => m.TotalDeHoras)
+                    @Html.HiddenFor(m => m.ValorFinalAluguel)
                     <div class="form-group">
                         <label asp-for="Placa" class="control-label"></label>
-                        <input asp-for="Placa" class="form-control" />
-                        <span asp-validation-for="Placa" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="IdCliente" class="control-label"></label>
-                        <input asp-for="IdCliente" class="form-control" />
-                        <span asp-validation-for="IdCliente" class="text-danger"></span>
+                        <input asp-for="Placa" class="form-control" disabled="disabled" style="text-align:center;" />
                     </div>
                     <div class="form-group">
                         <label asp-for="Categoria" class="control-label"></label>
-                        <input asp-for="Categoria" class="form-control" />
-                        <span asp-validation-for="Categoria" class="text-danger"></span>
+                        <input asp-for="Categoria" class="form-control" disabled="disabled" style="text-align:center;"/>
                     </div>
                     <div class="form-group">
                         <label asp-for="ValorHora" class="control-label"></label>
-                        <input asp-for="ValorHora" class="form-control" />
-                        <span asp-validation-for="ValorHora" class="text-danger"></span>
+                        <input asp-for="ValorHora" class="form-control" disabled="disabled" style="text-align:center;" />
                     </div>
                     <div class="form-group">
                         <label asp-for="TotalDeHoras" class="control-label"></label>
-                        <input asp-for="TotalDeHoras" class="form-control" />
-                        <span asp-validation-for="TotalDeHoras" class="text-danger"></span>
+                        <input asp-for="TotalDeHoras" class="form-control" disabled="disabled" style="text-align:center;"/>
                     </div>
                     <div class="form-group">
                         <label asp-for="ValorFinalAluguel" class="control-label"></label>
-                        <input asp-for="ValorFinalAluguel" class="form-control" />
-                        <span asp-validation-for="ValorFinalAluguel" class="text-danger"></span>
+                        <input asp-for="ValorFinalAluguel" class="form-control"disabled="disabled" style="text-align:center;" />
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Create" class="btn btn-primary" />
+                        <input type="submit" value="Confirmar!" class="btn btn-success" />
                     </div>
                 </form>
             </div>
         </div>
     </div>
+</div>
+<div>
+    <a asp-action="Index" asp-controller="Home">Retornar Para Listagem? Clique aqui.</a>
+</div>
 
-    <div>
-        <a asp-action="Index">Back to List</a>
-    </div>
-
-    @section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    }
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

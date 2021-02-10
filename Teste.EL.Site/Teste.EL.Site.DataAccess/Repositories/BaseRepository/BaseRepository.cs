@@ -56,6 +56,7 @@ namespace Teste.EL.Site.Infrastructure.Repositories.BaseRepository
 
         private T chamar<T>(Method method, string jwtToken, object parametrosUrl, object corpoRequisicao)
         {
+            jwtToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEyNTQyNDcxNjU3Iiwicm9sZSI6IkNsaWVudGUiLCJuYmYiOjE2MTI5ODU1NDQsImV4cCI6MTYxMjk5OTk0NCwiaWF0IjoxNjEyOTg1NTQ0fQ.WjNFYDvuKK5EIs_rOqfUofg3gCYBLGcM7F2O-H3R5X8";
             var cliente = new RestClient(RotaCompleta);
 
             var request = ObterRequestComHeader(method, jwtToken);
@@ -72,19 +73,7 @@ namespace Teste.EL.Site.Infrastructure.Repositories.BaseRepository
             else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
                 return default(T);
             else
-            {
-                RetornoApi retorno = new RetornoApi();
-                string mensagemRetorno = String.Empty;
-
-                if (response.Content != null && !String.IsNullOrWhiteSpace(response.Content)) 
-                {
-                    retorno = JsonSerializer.Deserialize<RetornoApi>(response.Content, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
-                    mensagemRetorno = string.Join(" ; ", retorno.Erros.Select(r => r.Mensagem));
-                }
-
-                throw new Exception($"Codigo Erro (http): {response.StatusCode}, Mensagem:{ mensagemRetorno}");
-            }
-            throw new Exception(" Codigo Erro: " + response.StatusCode);
+                throw new Exception($"Codigo Erro (http): {response.StatusCode}, Mensagem:{ response.Content}");
         }
 
         protected virtual RestRequest ObterRequestComHeader(Method method, string jwtToken)

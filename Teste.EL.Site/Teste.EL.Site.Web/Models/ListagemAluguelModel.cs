@@ -18,18 +18,7 @@ namespace Teste.EL.Site.Web.Models
             if (listaAluguelDTO != null)
             {
                 foreach (var aluguel  in listaAluguelDTO)
-                {
-                    ListaAluguelCliente.Add(new AluguelModel()
-                    {
-                        IdAluguel = aluguel.IdAluguel,
-                        IdCliente = aluguel.Cliente.IdCliente,
-                        Placa = aluguel.Veiculo.Placa,
-                        Categoria = aluguel.Categoria,
-                        ValorHora = aluguel.ValorHora,
-                        TotalDeHoras = aluguel.TotalDeHoras,
-                        ValorFinalAluguel = aluguel.ValorHora * aluguel.TotalDeHoras
-                    }); 
-                }
+                    ListaAluguelCliente.Add(new AluguelModel(aluguel)); 
             }
         }
     }

@@ -1,4 +1,38 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿function chamadaAjax(url, parametros, callbackSucesso, callbackErro, async, naoExibirCarregando) {
+    $.ajax({
+        type: "POST",
+        url: url,
+        cache: false,
+        data: JSON.stringify(parametros),
+        dataType: 'html',
+        traditional: true,
+        contentType: 'application/json',
+        async: async,
+        beforeSend: function () {
+            if (!naoExibirCarregando) {
+                exibirCarregando();
+            }
+        },
+        complete: function () {
+            if (!naoExibirCarregando) {
+                esconderCarregando();
+            }
+        },
+        success: function (args) {
+            callbackSucesso(args);
+        },
+        error: function (reqObj, tipoErro, mensagemErro) {
+            if (callbackErro) {
+                callbackErro(tipoErro, mensagemErro)
+            }
+        }
+    });
+}
 
-// Write your JavaScript code.
+function exibirCarregando() {
+    $('.carregando').show();
+}
+
+function esconderCarregando() {
+    $('.carregando').hide();
+}

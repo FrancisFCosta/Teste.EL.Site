@@ -1,0 +1,71 @@
+﻿@model ListagemAluguelModel
+
+@{
+    ViewData["Title"] = "View";
+}
+
+<div id="filtro-listagem-veiculo">
+    <div class="row">
+        <div class="col-md-12 section-header" style="text-align: left; border-bottom: 1px solid; border-bottom-color: #eaeaea; padding-bottom:10px;">
+            <h3 class="title">
+                Listagem de Alugueis
+            </h3>
+        </div>
+    </div>
+</div>
+<br />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Código Aluguel
+            </th>
+            <th>
+                Categoria
+            </th>
+            <th>
+                Placa
+            </th>
+            <th>
+                Valor/Hora
+            </th>
+            <th>
+                Total Horas
+            </th>
+            <th>
+                Valor Final
+            </th>
+            @*<th></th>*@
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ListaAluguelCliente)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdAluguel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Categoria)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Placa)
+            </td>
+            <td>
+                @String.Format(new System.Globalization.CultureInfo("pt-BR"), "{0:C}", item.ValorHora)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalDeHoras)
+            </td>
+            <td>
+                @String.Format(new System.Globalization.CultureInfo("pt-BR"), "{0:C}", item.ValorFinalAluguel)
+            </td>
+            @*<td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>*@
+        </tr>
+        }
+    </tbody>
+</table>

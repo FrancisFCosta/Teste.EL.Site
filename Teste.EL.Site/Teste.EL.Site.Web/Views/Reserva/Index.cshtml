@@ -1,0 +1,56 @@
+﻿@model Teste.EL.Site.Web.Models.SimulacaoReservaModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div id="filtro-listagem-veiculo">
+    <div class="row">
+        <div class="col-md-12 section-header" style="text-align: left; border-bottom: 1px solid; border-bottom-color: #eaeaea; padding-bottom:10px;">
+            <h3 class="title">
+                Simulação da Reserva
+            </h3>
+        </div>
+    </div>
+    <div style="text-align:left; text-decoration-color:gray; margin-top:-10px;">
+        <font ="5px;"><i>Listagem</i> > <b>Simulação</b> > <i>Reserva </i> </font>
+    </div>
+    <br />
+    <br />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="SimularReserva">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="IdVeiculo" class="control-label"></label>
+                    <input asp-for="IdVeiculo" class="form-control" />
+                    <span asp-validation-for="IdVeiculo" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ValorHoraVeiculo" class="control-label"></label>
+                    <input asp-for="ValorHoraVeiculo" class="form-control" />
+                    <span asp-validation-for="ValorHoraVeiculo" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TotalHorasAluguel" class="control-label"></label>
+                    <input asp-for="TotalHorasAluguel" class="form-control" />
+                    <span asp-validation-for="TotalHorasAluguel" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DataPrevista" class="control-label"></label>
+                    <input asp-for="DataPrevista" class="form-control" />
+                    <span asp-validation-for="DataPrevista" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index" asp-controller="Home">Retornar Para Listagem? Clique aqui.</a>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

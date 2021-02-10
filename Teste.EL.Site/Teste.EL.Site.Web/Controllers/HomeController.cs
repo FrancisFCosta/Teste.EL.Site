@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Teste.EL.Site.DataTransferObjects.DTO;
 using Teste.EL.Site.Entidades.Enum;
 using Teste.EL.Site.Web.Models;
 
@@ -22,20 +23,42 @@ namespace Teste.EL.Site.Web.Controllers
         public IActionResult Index(CategoriaVeiculo? categoriaSelecionada)
         {
             if (categoriaSelecionada.HasValue)
-                return View(new ListagemVeiculosModel(categoriaSelecionada));
-            
-            return View(new ListagemVeiculosModel(categoriaSelecionada));
+                return View(new ListagemVeiculosModel(ListarVeiculosPorCategoria(categoriaSelecionada)));
+
+            return View(new ListagemVeiculosModel(ListarVeiculosPorCategoria(categoriaSelecionada)));
         }
 
-        public IActionResult Privacy()
+        public PartialViewResult ListarVeiculos(int? categoriaSelecionada)
         {
-            return View();
+            var categoria = (CategoriaVeiculo?)categoriaSelecionada;
+
+            var listaVeiculos = ListarVeiculosPorCategoria(categoria);
+
+            return PartialView("~/Views/Home/_ListaVeiculos.cshtml", new ListagemVeiculosModel(listaVeiculos, categoria));
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        private List<VeiculoDTO> ListarVeiculosPorCategoria(CategoriaVeiculo? categoria)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            //simula busca na base
+
+            List<VeiculoDTO> listaVeiculosDisponiveis = new List<VeiculoDTO>();
+            for (int i = 0; i < 6; i++)
+            {
+                listaVeiculosDisponiveis.Add(new VeiculoDTO()
+                {
+                    IdVeiculo = i + 1,
+                    Placa = "QUH1051",
+                    Ano = "2020/2020",
+                    Combustivel = "Alcool",
+                    Categoria = "Basico",
+                    LimitePortamalas = 320,
+                    Modelo = new ModeloDTO() { DescricaoModelo = "ARGO DRIVE 1.0" },
+                    Marca = new MarcaDTO() { DescricaoMarca = "FIAT", IdMarca = 1 },
+                    ValorHora = 27.99
+                });
+            }
+
+            return listaVeiculosDisponiveis;
         }
     }
 }

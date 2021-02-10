@@ -10,42 +10,49 @@ namespace Teste.EL.Site.Web.Models
 {
     public class ListagemVeiculosModel
     {
-        public List<VeiculoDTO> ListaVeiculosDisponiveis { get; set; }
+        public List<VeiculoModel> ListaVeiculosDisponiveis { get; set; }
         public List<SelectListItem> ListaCategorias { get; set; }
         public CategoriaVeiculo? CategoriaSelecionada { get; set; }
-        public ListagemVeiculosModel(CategoriaVeiculo? categoriaSelecionada)
+
+        public ListagemVeiculosModel(List<VeiculoDTO> listaVeiculosDTO, CategoriaVeiculo? categoriaSelecionada = null)
         {
             CategoriaSelecionada = categoriaSelecionada;
-            ListaVeiculosDisponiveis = new List<VeiculoDTO>();
-
-            for (int i = 0; i < 5; i++)
-            {
-                ListaVeiculosDisponiveis.Add(new VeiculoDTO()
-                {
-                    Placa = "QUH1051",
-                    Ano = "2020/2020",
-                    Combustivel = "Alcool",
-                    Categoria = "Basico",
-                    LimitePortamalas = 320,
-                    Modelo = new ModeloDTO() { DescricaoModelo = "ARGO DRIVE 1.0" },
-                    Marca = new MarcaDTO() { DescricaoMarca = "FIAT", IdMarca = 1 },
-                    ValorHora = 27.99
-                });
-            }
-
-            ListaCategorias = CriarListaOpcoesCategoria(categoriaSelecionada);
+            PreencherModelVeiculos(listaVeiculosDTO);
+            PreencherListaOpcoesCategoria(categoriaSelecionada);
         }
 
-        private List<SelectListItem> CriarListaOpcoesCategoria(CategoriaVeiculo? categoriaSelecionada)
+        private void PreencherModelVeiculos(List<VeiculoDTO> listaVeiculosDTO)
         {
-            var listaCategorias = Enum.GetValues(typeof(Teste.EL.Site.Entidades.Enum.CategoriaVeiculo));
-            var listaResultado = new List<SelectListItem>() { new SelectListItem() { Value = "", Text = "Categorias Disponíveis", Selected = true } };
+            ListaVeiculosDisponiveis = new List<VeiculoModel>();
 
-            listaResultado.Add(new SelectListItem() { Value = ((int)CategoriaVeiculo.Basico).ToString(), Text = Enum.GetName(typeof(CategoriaVeiculo), CategoriaVeiculo.Basico), Selected = categoriaSelecionada == CategoriaVeiculo.Basico });
-            listaResultado.Add(new SelectListItem() { Value = ((int)CategoriaVeiculo.Completo).ToString(), Text = Enum.GetName(typeof(CategoriaVeiculo), CategoriaVeiculo.Completo), Selected = categoriaSelecionada == CategoriaVeiculo.Completo });
-            listaResultado.Add(new SelectListItem() { Value = ((int)CategoriaVeiculo.Luxo).ToString(), Text = Enum.GetName(typeof(CategoriaVeiculo), CategoriaVeiculo.Luxo), Selected = categoriaSelecionada == CategoriaVeiculo.Luxo });
+            if (listaVeiculosDTO != null)
+            {
+                foreach (var veiculoDTO in listaVeiculosDTO)
+                {
+                    ListaVeiculosDisponiveis.Add(new VeiculoModel()
+                    {
+                        IdVeiculo = veiculoDTO.IdVeiculo,
+                        Placa = veiculoDTO.Placa,
+                        Marca = veiculoDTO.Marca?.DescricaoMarca,
+                        Modelo = veiculoDTO.Modelo?.DescricaoModelo,
+                         Ano = veiculoDTO.Ano,
+                        ValorHora = veiculoDTO.ValorHora,
+                        Combustivel = veiculoDTO.Combustivel,
+                        LimitePortamalas = veiculoDTO.LimitePortamalas,
+                        Categoria = veiculoDTO.Categoria,
+                        EstaAlugado = veiculoDTO.EstaAlugado
+                    });
+                }
+            }
+        }
 
-            return listaResultado;
+        private void PreencherListaOpcoesCategoria(CategoriaVeiculo? categoriaSelecionada)
+        {
+            ListaCategorias = new List<SelectListItem>();
+            ListaCategorias.Add(new SelectListItem() { Value = "", Text = "Categorias Disponíveis", Selected = true });
+            ListaCategorias.Add(new SelectListItem() { Value = ((int)CategoriaVeiculo.Basico).ToString(), Text = Enum.GetName(typeof(CategoriaVeiculo), CategoriaVeiculo.Basico), Selected = categoriaSelecionada == CategoriaVeiculo.Basico });
+            ListaCategorias.Add(new SelectListItem() { Value = ((int)CategoriaVeiculo.Completo).ToString(), Text = Enum.GetName(typeof(CategoriaVeiculo), CategoriaVeiculo.Completo), Selected = categoriaSelecionada == CategoriaVeiculo.Completo });
+            ListaCategorias.Add(new SelectListItem() { Value = ((int)CategoriaVeiculo.Luxo).ToString(), Text = Enum.GetName(typeof(CategoriaVeiculo), CategoriaVeiculo.Luxo), Selected = categoriaSelecionada == CategoriaVeiculo.Luxo });
         }
     }
 }

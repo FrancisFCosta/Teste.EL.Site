@@ -1,0 +1,175 @@
+﻿@model Teste.EL.Site.Web.Models.ClienteModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div id="cadastro-usuario">
+    <div class="row">
+        <div class="col-md-12 section-header" style="text-align: left; border-bottom: 1px solid; border-bottom-color: #eaeaea; padding-bottom:10px;">
+            <h3 class="title">
+                DADOS PESSOAIS
+            </h3>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <form class="col-md-12" asp-action="CriarCliente">
+            <div class="row">
+                <div class="col-md-6">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label asp-for="Nome" class="control-label"></label>
+                            </div>
+                            <div class="col-md-7">
+                                <input asp-for="Nome" class="form-control" />
+                                <span asp-validation-for="Nome" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label asp-for="CPF" class="control-label"></label>
+                            </div>
+                            <div class="col-md-5">
+                                <input asp-for="CPF" class="form-control" />
+                                <span asp-validation-for="CPF" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label asp-for="Aniversario" class="control-label"></label>
+                            </div>
+                            <div class="col-md-5">
+                                <input asp-for="Aniversario" class="form-control" />
+                                <span asp-validation-for="Aniversario" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label asp-for="Email" class="control-label"></label>
+                            </div>
+                            <div class="col-md-7">
+                                <input asp-for="Email" class="form-control" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label asp-for="Celular" class="control-label"></label>
+                            </div>
+                            <div class="col-md-5">
+                                <input asp-for="Celular" class="form-control" />
+                                <span asp-validation-for="Celular" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label asp-for="Endereco.Logradouro" class="control-label"></label>
+                            </div>
+                            <div class="col-md-7">
+                                <input asp-for="Endereco.Logradouro" class="form-control" />
+                                <span asp-validation-for="Endereco.Logradouro" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label asp-for="Endereco.Numero" class="control-label"></label>
+                            </div>
+                            <div class="col-md-4">
+                                <input asp-for="Endereco.Numero" class="form-control" />
+                                <span asp-validation-for="Endereco.Numero" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label asp-for="Endereco.CEP" class="control-label"></label>
+                            </div>
+                            <div class="col-md-4">
+                                <input asp-for="Endereco.CEP" class="form-control" />
+                                <span asp-validation-for="Endereco.CEP" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label asp-for="Endereco.Complemento" class="control-label"></label>
+                            </div>
+                            <div class="col-md-7">
+                                <input asp-for="Endereco.Complemento" class="form-control" />
+                                <span asp-validation-for="Endereco.Complemento" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label asp-for="Endereco.Cidade" class="control-label"></label>
+                            </div>
+                            <div class="col-md-7">
+                                <input asp-for="Endereco.Cidade" class="form-control" />
+                                <span asp-validation-for="Endereco.Cidade" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label asp-for="Endereco.Estado" class="control-label"></label>
+                            </div>
+                            <div class="col-md-7">
+                                <input asp-for="Endereco.Estado" class="form-control" />
+                                <span asp-validation-for="Endereco.Estado" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row col-md-12">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <input type="submit" value="Salvar" class="btn btn-success col-md-12" />
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+<script>
+    $("#CPF").mask('000.000.000-00', { reverse: true });
+    $("#Celular")
+        .mask("(99) 9999-9999?9")
+        .focusout(function (event) {
+            var target, phone, element;
+            target = (event.currentTarget) ? event.currentTarget : event.srcElement;
+            phone = target.value.replace(/\D/g, '');
+            element = $(target);
+            element.unmask();
+            if (phone.length > 10) {
+                element.mask("(99) 99999-999?9");
+            } else {
+                element.mask("(99) 9999-9999?9");
+            }
+        });
+</script>

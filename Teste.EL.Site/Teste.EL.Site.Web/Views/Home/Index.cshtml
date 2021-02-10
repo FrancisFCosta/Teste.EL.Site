@@ -2,36 +2,32 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-
 <style>
     .input-text-filtro {
         font-size: 15px;
     }
 </style>
 
-<form id="FormFiltroListagemVeiculo" onsubmit="window.location.href = '@Url.Action("Home")'">
-        <div class="row">
-            <div class="col-md-12 section-header" style="text-align: left; border-bottom: 1px solid; border-bottom-color: #eaeaea; padding-bottom:10px;">
-                <h3 class="title">
-                    ENCONTRE O SEU VEÍCULO
-                </h3>
-            </div>
+<div id ="filtro-listagem-veiculo">
+    <div class="row" style="border-bottom: 1px solid; border-bottom-color: #eaeaea; padding-bottom: 10px;">
+        <div class="col-md-9 section-header" style="text-align: left; ">
+            <h3 class="title">
+                ESCOLHA UM VEÍCULO DO SEU JEITO!
+            </h3>
         </div>
-        <br />
-        <div class="row">
-            <div class="col-md-9"></div>
-            <div class="col-md-3">@Html.DropDownListFor(m => m.ListaCategorias, Model.ListaCategorias, null, new { @id = "categoriaVeiculo", @class = "form-control", onchange = @"alteracaoCategoria();" })</div>
-        </div>
-        @Html.HiddenFor(m => m.CategoriaSelecionada)
-</form>
-<br />
+        <div class="col-md-3">@Html.DropDownListFor(m => m.ListaCategorias, Model.ListaCategorias, null, new { @id = "ListaCategorias", @class = "form-control", onchange = @"Home.aoAlterarCategoria();" })</div>
+    </div>
+    <br />
+    @*<div class="row">
+        <div class="col-md-9"></div>
+        <div class="col-md-3">@Html.DropDownListFor(m => m.ListaCategorias, Model.ListaCategorias, null, new { @id = "ListaCategorias", @class = "form-control", onchange = @"Home.aoAlterarCategoria();" })</div>
+    </div>*@
+</div>
 <div id="listagem-veiculo" class="d-none d-md-block">
     @Html.Partial("_ListaVeiculos", Model)
 </div>
-<script>
-    function alteracaoCategoria() {
-        $('#CategoriaSelecionada').val($('#ListaCategorias').val());
-        $('#form-filtro-listagem-veiculo').submit();
-    }
 
+<script src="~/js/home.js"></script>
+<script>
+    Home.UrlListarPorCategoria = '@Url.Action("ListarVeiculos", "Home")';
 </script>

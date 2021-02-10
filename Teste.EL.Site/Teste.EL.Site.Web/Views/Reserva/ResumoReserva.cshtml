@@ -1,0 +1,64 @@
+﻿@model Teste.EL.Site.Web.Models.AluguelModel
+
+@{
+    ViewData["Title"] = "ResumoReserva";
+}
+<div id="filtro-listagem-veiculo">
+    <div class="row">
+        <div class="col-md-12 section-header" style="text-align: left; border-bottom: 1px solid; border-bottom-color: #eaeaea; padding-bottom:10px;">
+            <h3 class="title">
+                Resumo da Reserva
+            </h3>
+        </div>
+    </div>
+    <br />
+    <div>
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="ConcluirReserva">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Placa" class="control-label"></label>
+                        <input asp-for="Placa" class="form-control" />
+                        <span asp-validation-for="Placa" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="IdCliente" class="control-label"></label>
+                        <input asp-for="IdCliente" class="form-control" />
+                        <span asp-validation-for="IdCliente" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Categoria" class="control-label"></label>
+                        <input asp-for="Categoria" class="form-control" />
+                        <span asp-validation-for="Categoria" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ValorHora" class="control-label"></label>
+                        <input asp-for="ValorHora" class="form-control" />
+                        <span asp-validation-for="ValorHora" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TotalDeHoras" class="control-label"></label>
+                        <input asp-for="TotalDeHoras" class="form-control" />
+                        <span asp-validation-for="TotalDeHoras" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ValorFinalAluguel" class="control-label"></label>
+                        <input asp-for="ValorFinalAluguel" class="form-control" />
+                        <span asp-validation-for="ValorFinalAluguel" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

@@ -12,7 +12,7 @@ using Teste.EL.Site.Web.Models;
 
 namespace Teste.EL.Site.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly VeiculoBusiness _veiculoBLL;
 
@@ -24,6 +24,7 @@ namespace Teste.EL.Site.Web.Controllers
 
         public IActionResult Index()
         {
+            base.PreencherViewBagUsuarioLogado();
             return View(new ListagemVeiculosModel(ListarVeiculosPorCategoria(null)));
         }
 

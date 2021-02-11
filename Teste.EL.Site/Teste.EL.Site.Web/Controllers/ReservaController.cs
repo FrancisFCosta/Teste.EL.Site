@@ -6,7 +6,7 @@ using Teste.EL.Site.Web.Models;
 
 namespace Teste.EL.Site.Web.Controllers
 {
-    public class ReservaController : Controller
+    public class ReservaController : BaseController
     {
         private readonly VeiculoBusiness _veiculoBLL;
         private readonly ReservaBusiness _reservaBLL;
@@ -20,6 +20,7 @@ namespace Teste.EL.Site.Web.Controllers
         public IActionResult Index(string placa)
         {
             var veiculo = _veiculoBLL.ObterPorPlaca(placa);
+            base.PreencherViewBagUsuarioLogado();
             return View(new SimulacaoReservaModel(veiculo));
         }
 
@@ -36,6 +37,7 @@ namespace Teste.EL.Site.Web.Controllers
 
                 var aluguel = _reservaBLL.SimularAluguel(aluguelDTO);
                 aluguel.Veiculo.Placa = simulacaoReserva.Placa;
+
                 return View("ResumoReserva", new AluguelModel(aluguel));
             }
             else
@@ -46,7 +48,21 @@ namespace Teste.EL.Site.Web.Controllers
 
         public IActionResult ConcluirReserva(AluguelModel aluguel)
         {
-            if (aluguel != null)
+            if (!VerificarUsuarioLogado()) 
+            {
+                SalvarReservaCookie(aluguel);
+                return RedirectToAction("Login", "CadastroUsuario", new UsuarioModel() { PreReserva = true }); ;
+            }
+
+            if (aluguel.IdCliente.Equals(0))
+            {
+                SalvarReservaCookie(aluguel);
+                return RedirectToAction("Index", "CadastroCliente");
+            }
+
+            var aluguelParaProcessamento = aluguel ?? RecuperarReservaCookie();
+
+            if (aluguelParaProcessamento != null)
             {
                 AluguelDTO aluguelDTO = new AluguelDTO()
                 {
@@ -57,7 +73,7 @@ namespace Teste.EL.Site.Web.Controllers
                     ValorFinal = aluguel.ValorFinalAluguel
                 };
 
-                _reservaBLL.EfetuarAluguel(aluguelDTO, null);
+                _reservaBLL.EfetuarAluguel(aluguelDTO, ObterJWToken());
             }
             else
             {

@@ -6,8 +6,8 @@ namespace Teste.EL.Site.Entidades.DTO
 {
     public class AutenticacaoDTO
     {
-        public UsuarioDTO usuario { get; set; }
-        public ClienteDTO cliente { get; set; }
-        public String token { get; set; }
+        public UsuarioDTO Usuario { get; set; }
+        public ClienteDTO Cliente { get; set; }
+        public String Token { get; set; }
     }
 }

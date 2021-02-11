@@ -22,14 +22,18 @@
                             <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link  text-white" asp-area="" asp-controller="CadastroUsuario" asp-action="Login">Entrar</a>
+                            <a class="nav-link  text-white" asp-area="" asp-controller="CadastroUsuario" asp-action="Login"> <span style="text-overflow: ellipsis; max-width:20px;"> @(@ViewBag.UsuarioLogado ?? false ? String.Format("Olá {0}!", !String.IsNullOrWhiteSpace(@ViewBag.Nome) ? @ViewBag.Nome : "Usuário") : "Entrar")</span></a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link  text-white" asp-area="" asp-controller="CadastroCliente" asp-action="index">Dados Pessoais</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link  text-white" asp-area="" asp-controller="ListagemAluguel" asp-action="index">Listagem Aluguel</a>
-                        </li>
+                        @if (@ViewBag.UsuarioLogado ?? false)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link  text-white" asp-area="" asp-controller="ListagemAluguel" asp-action="index">Listagem Aluguel</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link  text-white" asp-area="" asp-controller="CadastroUsuario" asp-action="Loggout">Sair</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

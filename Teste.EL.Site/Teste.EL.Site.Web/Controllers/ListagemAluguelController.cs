@@ -10,11 +10,12 @@ using Teste.EL.Site.Web.Models;
 
 namespace Teste.EL.Site.Web.Controllers
 {
-    public class ListagemAluguelController : Controller
+    public class ListagemAluguelController : BaseController
     {
         public IActionResult Index(int idCliente)
         {
             List<AluguelDTO> listaAlugueisCliente = ListarAluguelPorCliente(idCliente);
+            base.PreencherViewBagUsuarioLogado();
             return View(new ListagemAluguelModel(listaAlugueisCliente));
         }
 

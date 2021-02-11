@@ -15,7 +15,9 @@ namespace Teste.EL.Site.Web.Models
         public EnderecoModel Endereco { get; set; }
         public string Email { get; set; }
         public string Celular { get; set; }
-
+        public bool PreReserva { get; set; }
+        
+        public ClienteModel() { }
         public ClienteModel(ClienteDTO clienteDTO) 
         {
             if (clienteDTO != null)

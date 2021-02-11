@@ -28,7 +28,7 @@ namespace Teste.EL.Site.Infrastructure.Repositories
 
         public List<AluguelDTO> ListarPorIdCliente(int idCliente, string jwToken)
         {
-            List<AluguelDTO> retorno = Post<List<AluguelDTO>>($"{_rotaAluguel}/{idCliente}", jwToken, null);
+            List<AluguelDTO> retorno = Get<List<AluguelDTO>>($"{_rotaAluguel}/clientes/{idCliente}", jwToken, null);
             return retorno;
         }
     }

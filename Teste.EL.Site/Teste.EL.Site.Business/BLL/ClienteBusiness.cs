@@ -21,5 +21,10 @@ namespace Teste.EL.Site.Business.BLL
         {
             return _clienteRepository.ObterPorId(idCliente, jwtoken);
         }
+
+        public void AtualizarCliente(ClienteDTO clienteDTO, string jwtoken)
+        {
+            _clienteRepository.AtualizarCliente(clienteDTO, jwtoken);
+        }
     }
 }

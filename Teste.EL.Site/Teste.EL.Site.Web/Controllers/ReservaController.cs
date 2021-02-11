@@ -26,6 +26,8 @@ namespace Teste.EL.Site.Web.Controllers
 
         public IActionResult SimularReserva(SimulacaoReservaModel simulacaoReserva)
         {
+            base.PreencherViewBagUsuarioLogado();
+
             if (simulacaoReserva != null)
             {
                 AluguelDTO aluguelDTO = new AluguelDTO()
@@ -48,25 +50,26 @@ namespace Teste.EL.Site.Web.Controllers
 
         public IActionResult ConcluirReserva(AluguelModel aluguel)
         {
-            if (!VerificarUsuarioLogado()) 
+            if (!VerificarUsuarioLogado())
             {
                 SalvarReservaCookie(aluguel);
-                return RedirectToAction("Login", "CadastroUsuario", new UsuarioModel() { PreReserva = true }); ;
+                return RedirectToAction("Login", "CadastroUsuario", new UsuarioModel() { PreReserva = true });
             }
-
-            if (aluguel.IdCliente.Equals(0))
+            var clienteLogado = ObterClienteLogado();
+            if (clienteLogado?.IdCliente == 0 && aluguel.IdCliente.Equals(0))
             {
                 SalvarReservaCookie(aluguel);
-                return RedirectToAction("Index", "CadastroCliente");
+                return RedirectToAction("Index", "CadastroCliente", new ClienteModel() { PreReserva = true });
             }
 
-            var aluguelParaProcessamento = aluguel ?? RecuperarReservaCookie();
-
+            var aluguelParaProcessamento = aluguel;
+            aluguelParaProcessamento.IdCliente = clienteLogado.IdCliente;
             if (aluguelParaProcessamento != null)
             {
                 AluguelDTO aluguelDTO = new AluguelDTO()
                 {
                     Veiculo = new VeiculoDTO() { IdVeiculo = aluguel.IdVeiculo, Placa = aluguel.Placa },
+                    Cliente = new ClienteDTO() { IdCliente = aluguel.IdCliente },
                     TotalDeHoras = aluguel.TotalDeHoras,
                     DataPrevistaAluguel = aluguel.DataPrevistaAluguel,
                     ValorHora = aluguel.ValorHora,
@@ -79,6 +82,7 @@ namespace Teste.EL.Site.Web.Controllers
             {
                 return View("Index", "Home");
             }
+            base.PreencherViewBagUsuarioLogado();
             return View("ReservaConcluida");
         }
     }

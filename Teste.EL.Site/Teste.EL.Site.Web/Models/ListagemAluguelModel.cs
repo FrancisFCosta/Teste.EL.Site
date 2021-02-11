@@ -10,6 +10,8 @@ namespace Teste.EL.Site.Web.Models
     public class ListagemAluguelModel
     {
         public List<AluguelModel> ListaAluguelCliente { get; set; }
+        public DateTime PeriodoInicio{ get; set; }
+        public DateTime PeriodoFinal { get; set; }
 
         public ListagemAluguelModel(List<AluguelDTO> listaAluguelDTO)
         {

@@ -28,6 +28,12 @@
                             </div>
                         </div>
                     </div>
+                    <div style="display:none">
+                        <div class="col-md-5">
+                            <input asp-for="PreReserva" class="form-control" />@( @ViewBag.PreReserva ?? false) </input>
+                            <span asp-validation-for="CPF" class="text-danger"></span>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <div class="row">
                             <div class="col-md-3">

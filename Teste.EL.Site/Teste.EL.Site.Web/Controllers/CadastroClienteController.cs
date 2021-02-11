@@ -14,8 +14,9 @@ namespace Teste.EL.Site.Web.Controllers
             _clienteBLL = new ClienteBusiness();
         }
 
-        public IActionResult Index()
+        public IActionResult Index(ClienteModel clienteModel)
         {
+            ViewBag.PreReserva = clienteModel.PreReserva;
             var cliente = ObterClienteLogado();
             base.PreencherViewBagUsuarioLogado();
             return View(cliente);
@@ -23,11 +24,14 @@ namespace Teste.EL.Site.Web.Controllers
 
         public IActionResult RegistrarCliente(ClienteModel clienteModel)
         {
-            ClienteDTO clienteDTO = ConverterModelParaDTO(clienteModel);
-
             if (clienteModel != null)
             {
-                clienteDTO = _clienteBLL.RegistrarCliente(clienteDTO, ObterJWToken());
+                ClienteDTO clienteDTO = ConverterModelParaDTO(clienteModel);
+                if (clienteDTO.IdCliente.Equals(0))
+                    clienteDTO = _clienteBLL.RegistrarCliente(clienteDTO, ObterJWToken());
+                else
+                    _clienteBLL.AtualizarCliente(clienteDTO, ObterJWToken());
+
                 AtualizarClienteCookie(new ClienteModel(clienteDTO));
                 if (clienteDTO != null)
                 {

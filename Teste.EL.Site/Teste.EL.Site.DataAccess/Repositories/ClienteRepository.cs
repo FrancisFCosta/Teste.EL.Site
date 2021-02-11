@@ -22,5 +22,10 @@ namespace Teste.EL.Site.Infrastructure.Repositories
             ClienteDTO retorno = Get<ClienteDTO>($"{_rotaClientes}/{idCliente}", jwtoken, null);
             return retorno;
         }
+
+        public void AtualizarCliente(ClienteDTO cliente, string jwtoken)
+        {
+            Put<ClienteDTO>(_rotaClientes + "/", jwtoken, cliente);
+        }
     }
 }

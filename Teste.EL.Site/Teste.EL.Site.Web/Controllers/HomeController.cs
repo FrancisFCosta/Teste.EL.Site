@@ -38,7 +38,7 @@ namespace Teste.EL.Site.Web.Controllers
         private List<VeiculoDTO> ListarVeiculosPorCategoria(CategoriaVeiculo? categoria)
         {
             if (categoria.HasValue)
-                return _veiculoBLL.ListarDisponiveisPorCategoria(categoria.Value);
+                return _veiculoBLL.ListarDisponiveisPorCategoria(categoria.Value)?.Where(veiculo => !veiculo.EstaAlugado)?.ToList();
             else
                 return _veiculoBLL.ListarDisponiveis();
         }

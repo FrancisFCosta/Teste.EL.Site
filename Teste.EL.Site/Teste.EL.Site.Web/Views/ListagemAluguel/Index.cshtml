@@ -14,41 +14,72 @@
     </div>
 </div>
 <br />
+<br />
 
-@*<div class="row">
+<div class="row">
     <div class="form-group">
         <div class="row">
-            <div class="col-md-4">
-                <div ="row">
-                    <div class="col-md-7">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-4" style="vertical-align: middle; text-align: right;">
                         <label asp-for="PeriodoInicio" class="control-label">Período Início</label>
                     </div>
                     <div class="col-md-7">
-                        <input asp-for="PeriodoInicio" class="form-group" />
+                        <input asp-for="PeriodoInicio" class="form-control" />
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="col-md-7">
-                    <label asp-for="PeriodoFinal" class="control-label">Período Fim</label>
-                </div>
-                <div class="col-md-7">
-                    <input asp-for="PeriodoFinal" class="form-group" />
+            <div class="col-md-5">
+                <div class="row">
+                    <div class="col-md-4" style="vertical-align: middle; text-align: right;">
+                        <label asp-for="PeriodoFinal" class="control-label">Período Fim</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input asp-for="PeriodoFinal" class="form-control" />
+                    </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <center>
-                    <butoton href="#" class="btn btn-success">
-                        <span class="glyphicon glyphicon-star-empty">Filtrar</span>
-                    </butoton>
-                </center>
+            <div class="col-md-1">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-6"></div>
+                        <div class="col-md-6">
+                            <center>
+                                <button href="#" id="filtro-data" class="btn btn-success" onclick="aoClicarEmFiltrar();">
+                                    <span class="glyphicon glyphicon-star-empty">Filtrar</span>
+                                </button>
+                            </center>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        
+
     </div>
-</div>*@
+</div>
+<br />
+<br />
 
 <div id="grid-listagem-luguel">
     @Html.Partial("_GridAlugueis", Model)
 </div>
+
+<script>
+    var URL_FILTRO_DATA = '@Url.Action("ListarPorPeriodo", "ListagemAluguel")';
+
+    function aoClicarEmFiltrar() {
+        var data = {
+            periodoInicio: $('#PeriodoInicio').val(),
+            periodoFinal: $('#PeriodoFinal').val()
+        }
+        chamadaGET(URL_FILTRO_DATA, data, ListarPorPeriodoSucesso);
+    }
+
+    function ListarPorPeriodoSucesso(data) {
+        if (data) {
+            $('#grid-listagem-luguel').html(data);
+            $('#grid-listagem-luguel').load();
+        }
+    }
+</script>
 

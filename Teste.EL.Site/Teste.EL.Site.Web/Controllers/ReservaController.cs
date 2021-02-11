@@ -51,7 +51,7 @@ namespace Teste.EL.Site.Web.Controllers
         public IActionResult ConcluirReserva(AluguelModel aluguel)
         {
             var aluguelcookie = RecuperarReservaCookie();
-            var aluguelParaProcessamento = !aluguelcookie.IdVeiculo.Equals(0) ? aluguelcookie : aluguel;
+            var aluguelParaProcessamento = aluguelcookie != null && !aluguelcookie.IdVeiculo.Equals(0) ? aluguelcookie : aluguel;
 
             if (!VerificarUsuarioLogado())
             {

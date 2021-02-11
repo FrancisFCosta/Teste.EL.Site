@@ -12,9 +12,8 @@
         </div>
     </div>
     <div style="text-align:left; text-decoration-color:gray;">
-        <font ="5px;"><i>Listagem</i> > <i>Simulação</i> > <b>Reserva</b> </font>
+        <font size="3"><i>Listagem</i> > <i>Simulação</i> > <b>Reserva</b> </font>
     </div>
-    <br />
     <br />
     <br />
     <div>
@@ -38,25 +37,26 @@
                     @Html.HiddenFor(m => m.ValorHora)
                     @Html.HiddenFor(m => m.TotalDeHoras)
                     @Html.HiddenFor(m => m.ValorFinalAluguel)
+                    @Html.HiddenFor(m => m.DataPrevistaAluguel)
                     <div class="form-group">
                         <label asp-for="Placa" class="control-label"></label>
                         <input asp-for="Placa" class="form-control" disabled="disabled" style="text-align:center;" />
                     </div>
                     <div class="form-group">
                         <label asp-for="Categoria" class="control-label"></label>
-                        <input asp-for="Categoria" class="form-control" disabled="disabled" style="text-align:center;"/>
+                        <input asp-for="Categoria" class="form-control" disabled="disabled" style="text-align:center;" />
                     </div>
                     <div class="form-group">
-                        <label asp-for="ValorHora" class="control-label"></label>
-                        <input asp-for="ValorHora" class="form-control" disabled="disabled" style="text-align:center;" />
+                        <label asp-for="ValorHora" class="control-label">Valor/Hora</label>
+                        <input class="form-control" disabled="disabled" style="text-align:center;" value="@String.Format(new System.Globalization.CultureInfo("pt-BR"), "{0:C}", Model.ValorHora)" />
                     </div>
                     <div class="form-group">
-                        <label asp-for="TotalDeHoras" class="control-label"></label>
-                        <input asp-for="TotalDeHoras" class="form-control" disabled="disabled" style="text-align:center;"/>
+                        <label asp-for="TotalDeHoras" class="control-label">Total de Horas do Aluguel</label>
+                        <input asp-for="TotalDeHoras" class="form-control" disabled="disabled" style="text-align:center;" />
                     </div>
                     <div class="form-group">
-                        <label asp-for="ValorFinalAluguel" class="control-label"></label>
-                        <input asp-for="ValorFinalAluguel" class="form-control"disabled="disabled" style="text-align:center;" />
+                        <label asp-for="ValorFinalAluguel" class="control-label">Valor Final do Aluguel</label>
+                        <input class="form-control" disabled="disabled" style="text-align:center;" value="@String.Format(new System.Globalization.CultureInfo("pt-BR"), "{0:C}", Model.ValorFinalAluguel)" />
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Confirmar!" class="btn btn-success" />

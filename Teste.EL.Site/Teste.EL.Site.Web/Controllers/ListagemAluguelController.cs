@@ -32,6 +32,23 @@ namespace Teste.EL.Site.Web.Controllers
             return View(new ListagemAluguelModel(listaAlugueisCliente));
         }
 
+        public PartialViewResult ListarPorPeriodo([FromQuery] DateTime? periodoInicio, DateTime? periodoFinal)
+        {
+            List<AluguelDTO> listaAlugueisCliente = new List<AluguelDTO>();
+            var cliente = ObterClienteLogado();
+
+            if (cliente != null)
+                listaAlugueisCliente = ListarAluguelPorCliente(cliente.IdCliente);
+
+            if (periodoInicio.HasValue)
+                listaAlugueisCliente.RemoveAll(aluguel => aluguel.DataPrevistaAluguel < periodoInicio.Value);
+
+            if (periodoFinal.HasValue)
+                listaAlugueisCliente.RemoveAll(aluguel => aluguel.DataPrevistaAluguel > periodoFinal.Value);
+
+            return PartialView("~/Views/ListagemAluguel/_GridAlugueis.cshtml", new ListagemAluguelModel(listaAlugueisCliente));
+        }
+
         private List<AluguelDTO> ListarAluguelPorCliente(int idCliente)
         {
             return _reservaBusiness.ListarPorIdCliente(idCliente, ObterJWToken());

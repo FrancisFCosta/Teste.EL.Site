@@ -10,6 +10,9 @@
                 Categoria
             </th>
             <th>
+                Data Aluguel
+            </th>
+            <th>
                 Placa
             </th>
             <th>
@@ -27,31 +30,34 @@
     <tbody>
         @foreach (var item in Model.ListaAluguelCliente)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdAluguel)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Categoria)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Placa)
-                </td>
-                <td>
-                    @String.Format(new System.Globalization.CultureInfo("pt-BR"), "{0:C}", item.ValorHora)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TotalDeHoras)
-                </td>
-                <td>
-                    @String.Format(new System.Globalization.CultureInfo("pt-BR"), "{0:C}", item.ValorFinalAluguel)
-                </td>
-                @*<td>
-                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                    </td>*@
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdAluguel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Categoria)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataPrevistaAluguel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Placa)
+            </td>
+            <td>
+                @String.Format(new System.Globalization.CultureInfo("pt-BR"), "{0:C}", item.ValorHora)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalDeHoras)
+            </td>
+            <td>
+                @String.Format(new System.Globalization.CultureInfo("pt-BR"), "{0:C}", item.ValorFinalAluguel)
+            </td>
+            @*<td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>*@
+        </tr>
         }
     </tbody>
 </table>

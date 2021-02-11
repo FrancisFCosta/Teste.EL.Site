@@ -50,33 +50,36 @@ namespace Teste.EL.Site.Web.Controllers
 
         public IActionResult ConcluirReserva(AluguelModel aluguel)
         {
+            var aluguelcookie = RecuperarReservaCookie();
+            var aluguelParaProcessamento = !aluguelcookie.IdVeiculo.Equals(0) ? aluguelcookie : aluguel;
+
             if (!VerificarUsuarioLogado())
             {
-                SalvarReservaCookie(aluguel);
+                SalvarReservaCookie(aluguelParaProcessamento);
                 return RedirectToAction("Login", "CadastroUsuario", new UsuarioModel() { PreReserva = true });
             }
             var clienteLogado = ObterClienteLogado();
             if (clienteLogado?.IdCliente == 0 && aluguel.IdCliente.Equals(0))
             {
-                SalvarReservaCookie(aluguel);
+                SalvarReservaCookie(aluguelParaProcessamento);
                 return RedirectToAction("Index", "CadastroCliente", new ClienteModel() { PreReserva = true });
             }
-
-            var aluguelParaProcessamento = aluguel;
+            
             aluguelParaProcessamento.IdCliente = clienteLogado.IdCliente;
             if (aluguelParaProcessamento != null)
             {
                 AluguelDTO aluguelDTO = new AluguelDTO()
                 {
-                    Veiculo = new VeiculoDTO() { IdVeiculo = aluguel.IdVeiculo, Placa = aluguel.Placa },
-                    Cliente = new ClienteDTO() { IdCliente = aluguel.IdCliente },
-                    TotalDeHoras = aluguel.TotalDeHoras,
-                    DataPrevistaAluguel = aluguel.DataPrevistaAluguel,
-                    ValorHora = aluguel.ValorHora,
-                    ValorFinal = aluguel.ValorFinalAluguel
+                    Veiculo = new VeiculoDTO() { IdVeiculo = aluguelParaProcessamento.IdVeiculo, Placa = aluguelParaProcessamento.Placa },
+                    Cliente = new ClienteDTO() { IdCliente = aluguelParaProcessamento.IdCliente },
+                    TotalDeHoras = aluguelParaProcessamento.TotalDeHoras,
+                    DataPrevistaAluguel = aluguelParaProcessamento.DataPrevistaAluguel,
+                    ValorHora = aluguelParaProcessamento.ValorHora,
+                    ValorFinal = aluguelParaProcessamento.ValorFinalAluguel
                 };
 
                 _reservaBLL.EfetuarAluguel(aluguelDTO, ObterJWToken());
+                RemoverReservaCookie();
             }
             else
             {

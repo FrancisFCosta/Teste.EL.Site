@@ -33,7 +33,7 @@ namespace Teste.EL.Site.Web.Controllers
                 if (auth != null)
                 {
                     if (usuarioModel.PreReserva)
-                        return RedirectToAction("ConcluirReserva", "Reserva");
+                        return RedirectToAction("ConcluirReserva", "Reserva", null);
                     return RedirectToAction("Index", "Home");
                 }
             }

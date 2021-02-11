@@ -115,5 +115,11 @@ namespace Teste.EL.Site.Web.Controllers
             return null;
         }
 
+        protected void RemoverReservaCookie()
+        {
+            CookieOptions cookieOptions = new CookieOptions();
+            cookieOptions.Expires = DateTime.Now.AddDays(-1);
+            Response.Cookies.Append(_chaveCookieReserva, String.Empty, cookieOptions);
+        }
     }
 }

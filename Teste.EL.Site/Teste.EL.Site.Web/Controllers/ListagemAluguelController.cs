@@ -32,6 +32,15 @@ namespace Teste.EL.Site.Web.Controllers
             return View(new ListagemAluguelModel(listaAlugueisCliente));
         }
 
+        public IActionResult FeedBack()
+        {
+            return View();
+        }
+        public IActionResult AgradecimentoFeedback()
+        {
+            return View();
+        }
+
         public PartialViewResult ListarPorPeriodo([FromQuery] DateTime? periodoInicio, DateTime? periodoFinal)
         {
             List<AluguelDTO> listaAlugueisCliente = new List<AluguelDTO>();

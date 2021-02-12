@@ -2,19 +2,32 @@
 
 O Projeto representa a interfaceWeb criada para atender um cenário hipotético de uma locadora de veículos. Duvidas sobre o relacionamento entre as entidades podem ser esclarecidas na seção Diagrama de classes.  Mais informações sobre o funcionamento podem ser verificadas na seção Resquisitos do projeto. 
 
+## Web-To-Case Salesforce 
+
+Foi realizada a implementação da criação de casos no salesforce para os usuários darem um feedback de suas reservas. Para isso foi realizada a configuração da pagina Web-to-Case no salesforce, que por sua vez recebe o formulario e realiza a criação do caso que pode ser acompanhado por meio da ferramente Service Cloud. Exemplo abaixo:
+
+• Formulário no site:
+
+
+![alt text](https://github.com/FrancisFCosta/Teste.EL.Site/blob/main/FormularioWebSite.png?raw=true)
+
+• Caso criado no Salesforce:
+
+
+![alt text](https://github.com/FrancisFCosta/Teste.EL.Site/blob/main/ExemploCasoCriado.png?raw=true)
+
 ## Decisões Técnicas
 
-• Optou-se por desenvolver uma api RESTfull, sendo possível verificar sua documentação exposta por OpenAPI (Swagger).
+• Optou-se por desenvolver uma a interface Web utilizando framework ASP.NET Core MVC.
 
-• Utilizando ASP.NET Core 3.1 por ser performático e multiplataforma.
 
-• Estrutura da Solução criada com base em principios do DDD, visando diminuir a complexidade e facilitar o entendimento e manutenção das regras de negócio.
+• Estrutura da Solução criada adotando um modelo de três camadas: Interface UI (Projeto Web), Camada de negócio (Projeto Business) e Camada de Acesso a Dados (Projeto Interface). Com essa configuração é possivel implementar de forma simples a segregação de responsabilidades por camada. 
 
-• Para aplicar a ideia 'Fail Fast Principle', está sendo utilizad Flunt.Validations. A biblioteca proporciona uma forma simples de realizar validações, sendo utilizada de forma que o domínio seja responsável por definir seu estado válido ao ser instanciado.
 
-• Criando projeto de testes com xUnit: Optou-se por este framework por ser mais performático e por ser mais adequado para a execução do TDD. Diferentemente do nUnit e MSTest, o xUnit cria uma instancia da classe de teste para cada um dos métodos, garantindo que os testes sejam executados paralelamente e de forma isolada).
+• Para trafego das informações está sendo utilizado o pattern Data Transfer Object (DTO), implementado no Projeto Entidades.
 
-• Implementando Autenticação e Autorização no esquema Bearer Authentication + JWT. A escolha é justificada por ser uma solução simples e robusta o suficiente para resolver o problema (Keep it Simple Stupid).
+
+• Implementando Autenticação e Autorização no esquema Bearer Authentication + JWT. 
 
 ## Diagrama de classes
 
@@ -24,27 +37,16 @@ Para melhor entendimento de como estão relacionadas as entidades do domínio, f
 
 ## Requisitos do projeto
 
-• Prover um Serviço Web com arquitetura a seu critério para atender as demandas do Site e/ou App 
+• Disponibilizar o Site para que o cliente visualize os veículos por categorias, realize o cadastro e efetue a locação do veículo
 
-• Um serviço que deverá disponibilizar autenticação e autorização para usuários com os perfis: OPERADOR, CLIENTE.
 
-• O cadastro de usuário terá os campos login, senha, onde o campo login pode ser o CPF do cliente (perfil CLIENTE) ou a matrícula (perfil OPERADOR). 
+• O Site deverá exibir os veículos disponíveis para locação 
 
-• O cadastro de cliente deverá ter os campos: ID, NOME, CPF, ANIVERSARIO, ENDEREÇO (CEP, logradouro, número, complemento, cidade e estado).
 
-• O cadastro de operador deverá ter os campos: MATRÍCULA, NOME. 
+• Disponibilizar um formulário de simulação de locação com base no veículo selecionado, valor hora do veículo, total de horas. Caso o cliente confirme, validar\realizar o login para a simulação se tornar uma reserva 
 
-• Se o Login for CPF retornar os dados do cliente, se for por matrícula retornar os dados do operador. 
 
-• Cadastro de veículos informando os campos: PLACA, MARCA, MODELO, ANO, VALOR HORA, COMBUSTÍVEL (gasolina, álcool, diesel), LIMITE PORTA MALAS, CATEGORIA (básico, completo, luxo).
+• Caso o CPF ainda não esteja na base de dados, realizar o cadastro de cliente informando os dados conforme especificação Serviço Web
 
-• Cadastro de Marcas e Modelos para relacionar ao cadastro de veículos.
 
-• Disponibilizar um serviço de simulação de locação com base no veículo selecionado, valor hora do veículo, total de horas. 
-
-• Serviço de agendamento de um veículo calculando o valor final considerando a categoria do veículo, valor hora, total de horas.
-
-• Disponibilizar um modelo de contrato de locação no formato .PDF.
-
-• Check-List para vistoria na devolução do veículo considerando os itens: CARRO LIMPO, TANQUE CHEIO, AMASSADOS e ARRANHÕES, considerando um custo adicional de 30% do valor da locação em cada ocorrência. 
- 
+• Listar as locações já realizadas pelo cliente por data 

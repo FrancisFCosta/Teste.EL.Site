@@ -34,10 +34,12 @@ namespace Teste.EL.Site.Web.Controllers
 
         public IActionResult FeedBack()
         {
+            base.PreencherViewBagUsuarioLogado();
             return View();
         }
         public IActionResult AgradecimentoFeedback()
         {
+            base.PreencherViewBagUsuarioLogado();
             return View();
         }
 

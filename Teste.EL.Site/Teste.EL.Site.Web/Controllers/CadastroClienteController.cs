@@ -41,6 +41,7 @@ namespace Teste.EL.Site.Web.Controllers
                         return RedirectToAction("Index", "Home");
                 }
             }
+            base.PreencherViewBagUsuarioLogado();
             return RedirectToAction("Index");
         }
 
